@@ -1,0 +1,133 @@
+@font-face {
+    font-family: TheBeatles;
+    src: url(../font/BeatlesFont/BOOTLE__.TTF);
+}
+
+body {
+	background: #444;
+	color: #fff;
+}
+
+.jumbotron {
+	background: #fff;
+}
+
+#playerScore {
+	position: absolute;
+	top: 125px;
+	left: 25px;
+	color: #333;
+	font-size: 2em;
+}
+
+#timer {
+	position: absolute;
+	top: 125px;
+	right: 25px;
+	color: #333;
+	font-size: 2.5em;
+	text-align: center;
+}
+
+.jumbotron-text {
+	text-align: center;
+	color: #777 !important;
+}
+
+.Beatles {
+	font-family: TheBeatles;
+	max-width: 250px;
+	display: inline-block;
+}
+
+.Beatles .logo-small {
+    line-height: 0px;
+    font-size: 35px;
+    display: block;
+    margin-bottom: -64px;
+    margin-left: -20px;
+}
+
+#startBtn {
+	background: green;
+	padding: 15px;
+	text-align: center;
+	width: 25%;
+	margin: 0 auto;
+}
+
+#startBtn:hover {
+	background: darkgreen;
+	cursor: pointer;
+}
+
+.triviaTitle {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+	font-variant: small-caps;
+	margin-top: 0;
+}
+
+#question {
+	margin-bottom: 70px;
+}
+
+.questions {
+	text-align: center;
+}
+
+#answers {
+	display: inline-block;
+	width: 100%;
+}
+
+.answers {
+	background: steelblue;
+	border: 1px solid #fff;
+	border-radius: 15px;
+	padding: 15px 0;
+	margin-bottom: 20px;
+	width: 45%;
+	text-align: center;
+	float: left;
+	cursor: pointer;
+}
+
+.answers:nth-child(odd) {
+	margin-right: 10%;
+}
+
+.answers h3 {
+	margin: 10px 0;
+}
+
+@media only screen and (max-width: 767px) {
+	
+	#timer, #playerScore {
+		top: 50px;
+	}
+
+	.Beatles .logo-small {
+		margin-bottom: -35px;
+		margin-left: -7px;
+		font-size: .7em;
+	}
+
+	#answers {
+		padding: 0 5%;
+	}
+	.answers {
+		width: 100%;
+	}
+
+	.answers:nth-child(odd) {
+		margin-right: 0;
+	}
+}
+
+
+
+
+
+
+
+
