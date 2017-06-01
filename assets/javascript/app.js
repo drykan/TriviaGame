@@ -4,7 +4,6 @@ var question;
 var answers = "";
 var message = "";
 var image = "";
-var haveQuestion = false;
 var timer = 30;
 var timerId;
 var gameTrivia = [
@@ -49,10 +48,11 @@ var gameTrivia = [
 var currentQuestion = 0;
 var correct = 0;
 var total = gameTrivia.length;
-var score = "Score: " + correct + " / " + total;
 
 $("#timer").hide();
 $("#playerScore").hide();
+$("#nextBtn").hide();
+$("#answers").hide();
 
 
 //Start button to start the game.
@@ -60,22 +60,24 @@ $("#startBtn").click(function() {
 	$(this).hide();
 	$("#timer").show();
 	$("#playerScore").show();
+	$("#answers").show();
 	startGame();
+	timerId = setInterval(countdown, 1000);
 	countdown();
 });
 
 function startGame() {
+
 	
-	timerId = setInterval(countdown, 1000);
 	$(".questions").html(gameTrivia[currentQuestion].question);		//Sets up question
 	var options = gameTrivia[currentQuestion].options;				//logs the options for buttons
-	// var correctAnswer = gameTrivia[currentQuestion].answer;
-	// var userGuess = gameTrivia[currentQuestion].options;
 	$(".correct").hide();											//Hides the Correct or Incorrect alert
 	$("#message").hide();											//Hides the correct message screen upon start game
 	message = gameTrivia[currentQuestion].message;					//Populates the message with the text
 	image = "<img src= " + gameTrivia[currentQuestion].image + ">";	//Populates the message with the image
 	var score = "Score: " + correct + " / " + total;
+
+
 	//builds the Answers/Options and adds the array object stats
 	for(var i = 0; i < options.length; i++) {
 		var button = $('<button class="answers">');
@@ -90,12 +92,13 @@ function startGame() {
 	//Check the answer
 	$(".answers").click(function() {
 		var userGuess = $(this).data("id")
-		console.log("Answer: " + gameTrivia[currentQuestion].answer);
 		if(timer > 1) {	
 			if(gameTrivia[currentQuestion].answer == userGuess) {
 				correct++;
+				score = "Score: " + correct + " / " + total;
+				$("#playerScore").html(score);
 				$("#question").hide();
-				$(".answers").hide();
+				$("#answers").hide();
 				$(".correct").show();
 				$(".correct").html("Correct!");	
 				$(".correct").removeClass("wrongMessage");
@@ -104,10 +107,11 @@ function startGame() {
 				$("#message").html(message);
 				$("#image").show();
 				$("#image").html(image);
-				timer = 10;
+				$("#nextBtn").show();
+				timer = 80;
 			} else {
 				$("#question").hide();
-				$(".answers").hide();
+				$("#answers").hide();
 				$(".correct").show();
 				$(".correct").html("Wrong Answer");
 				$(".correct").removeClass("correctMessage");
@@ -116,6 +120,7 @@ function startGame() {
 				$("#message").html(message);
 				$("#image").show();
 				$("#image").html(image);
+				$("#nextBtn").show();
 				timer = 10;
 			}
 		} else {
@@ -126,24 +131,64 @@ function startGame() {
 
 }
 
-function nextQuestion() {
-	if(currentQuestion < gameTrivia.length) {
+$("#nextBtn").click( function() {
+	if(currentQuestion < total - 1) {
 		currentQuestion++;
+		console.log(currentQuestion);
+		console.log(total);
 		$("#question").show();
 		$("#image").hide();
-		$(".answers").html("");
+		$("#answers").html("");
+		$("#answers").show();
 		$("#message").html("");
+		$("#nextBtn").hide();
+		timer = 30;
+		startGame();
+		console.log(currentQuestion + " of " + total);
+	} else {
+		currentQuestion = 0;
+		$("#startBtn").show();
+		$(".correct").hide();
+		$("#message").hide();
+		$("#nextBtn").hide();
+		$("#image").hide();
+		$(".question").html("You scored: " + score);
+		timer = 30;
+		console.log(currentQuestion);
+	}
+});
+
+function nextQuestion() {
+	if(currentQuestion < total) {
+		currentQuestion++;
+		console.log(currentQuestion);
+		console.log(total);
+		$("#question").show();
+		$("#image").hide();
+		$("#answers").html("");
+		$("#answers").show();
+		$("#message").html("");
+		$("#nextBtn").hide();
 		startGame();
 	} else {
 		currentQuestion = 0;
-		alert("Game Over");
+		$("#startBtn").show();
+		$(".correct").hide();
+		$("#message").hide();
+		$("#nextBtn").hide();
+		$("#image").hide();
+		timer = 30;
+		timerId = clearInterval(timer);
 	}
 }
 
 function countdown() {
 	if (timer == 0) {
 		timer = 30;
+		$(".answers").html("");
+		$(".correct").hide();
 		nextQuestion();
+
 	} else {
 		$("#timer").html("Time: " + timer);
 		timer--;

@@ -75,7 +75,7 @@ img {
 }
 .slideshow .slideImages {
   transition: opacity 0.5s ease-out;
-  animation: moveSlideshow 15s linear infinite;
+  animation: moveSlideshow 35s linear infinite;
 }
 
 @keyframes moveSlideshow {
@@ -143,8 +143,13 @@ img {
 	text-align: center;
 }
 
+#right {
+	text-align: center;
+}
+
 #message {
 	font-size: 20px;
+	text-align: left;
 }
 
 .correctMessage {
@@ -159,6 +164,21 @@ img {
 	padding: 10px 0;
 	border: 1px solid #622424;
 	color: #622424;
+}
+
+#nextBtn {
+	width: 50%;
+	margin: 0 auto;
+	padding: 20px;
+	background: green;
+	color: #fff;
+	font-size: 1.5em;
+	border: none;
+}
+
+#nextBtn:hover {
+	background: darkgreen;
+	cursor: pointer;
 }
 
 @media only screen and (max-width: 767px) {
