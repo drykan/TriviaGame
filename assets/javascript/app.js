@@ -6,7 +6,7 @@ var message = "";
 var image = "";
 var haveQuestion = false;
 var timer = 30;
-var timerId = setInterval(countdown, 1000);
+var timerId;
 var gameTrivia = [
 {
 	question: "Which Beatle crossed Abbey Road first?",
@@ -65,7 +65,8 @@ $("#startBtn").click(function() {
 });
 
 function startGame() {
-
+	
+	timerId = setInterval(countdown, 1000);
 	$(".questions").html(gameTrivia[currentQuestion].question);		//Sets up question
 	var options = gameTrivia[currentQuestion].options;				//logs the options for buttons
 	// var correctAnswer = gameTrivia[currentQuestion].answer;
