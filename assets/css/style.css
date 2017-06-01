@@ -8,8 +8,13 @@ body {
 	color: #fff;
 }
 
+img {
+	max-width: 100%;
+}
+
 .jumbotron {
 	background: #fff;
+	padding-bottom: 0;
 }
 
 #playerScore {
@@ -47,6 +52,38 @@ body {
     margin-bottom: -64px;
     margin-left: -20px;
 }
+
+/* Slide Show */
+.slideshow {
+  height: 100px;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.slideshow > div {
+  height: 100px;
+  width: 5600px;
+  background: url(../images/slider.png);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform: translate3d(0, 0, 0);
+}
+.slideshow .slideImages {
+  transition: opacity 0.5s ease-out;
+  animation: moveSlideshow 15s linear infinite;
+}
+
+@keyframes moveSlideshow {
+  100% { 
+    transform: translateX(-66.6666%);  
+  }
+}
+/* END SLIDESHOW */
 
 #startBtn {
 	background: green;
@@ -87,6 +124,8 @@ body {
 	padding: 15px 0;
 	margin-bottom: 20px;
 	width: 45%;
+	font-size: 1.5em;
+	font-weight: normal;
 	text-align: center;
 	float: left;
 	cursor: pointer;
@@ -98,6 +137,28 @@ body {
 
 .answers h3 {
 	margin: 10px 0;
+}
+
+.correct {
+	text-align: center;
+}
+
+#message {
+	font-size: 20px;
+}
+
+.correctMessage {
+	background: #6fc474;
+	padding: 10px 0;
+	border: 1px solid #4b854f;
+	color: #3f7043;
+}
+
+.wrongMessage {
+	background: #ca4a4a;
+	padding: 10px 0;
+	border: 1px solid #622424;
+	color: #622424;
 }
 
 @media only screen and (max-width: 767px) {
