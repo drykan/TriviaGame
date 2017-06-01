@@ -160,8 +160,8 @@ $("#nextBtn").click( function() {
 		$("#nextBtn").hide();
 		$("#image").hide();
 		$(".question").show();
-		clearInterval(timer);
-		timer = 30;
+		clearInterval(timerId);
+		$("#timer").hide();
 		correct = 0;
 	}
 });

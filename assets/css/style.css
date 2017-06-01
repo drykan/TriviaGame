@@ -131,6 +131,10 @@ img {
 	cursor: pointer;
 }
 
+.answers:hover {
+	background: #549dd9;
+}
+
 .answers:nth-child(odd) {
 	margin-right: 10%;
 }
