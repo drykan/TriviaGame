@@ -1,3 +1,4 @@
+var correct = 0;
 $(document).ready(function() {
 
 var question;
@@ -46,7 +47,7 @@ var gameTrivia = [
 ];
 
 var currentQuestion = 0;
-var correct = 0;
+
 var total = gameTrivia.length;
 
 $("#timer").hide();
@@ -59,8 +60,12 @@ $("#answers").hide();
 $("#startBtn").click(function() {
 	$(this).hide();
 	$("#timer").show();
+	$("#answers").html("");
 	$("#playerScore").show();
 	$("#answers").show();
+	$("#question").show();
+	correct = 0;
+	timer = 30;
 	startGame();
 	timerId = setInterval(countdown, 1000);
 	countdown();
@@ -77,7 +82,6 @@ function startGame() {
 	image = "<img src= " + gameTrivia[currentQuestion].image + ">";	//Populates the message with the image
 	var score = "Score: " + correct + " / " + total;
 
-
 	//builds the Answers/Options and adds the array object stats
 	for(var i = 0; i < options.length; i++) {
 		var button = $('<button class="answers">');
@@ -88,6 +92,11 @@ function startGame() {
 	
 	$("#playerScore").html(score);
 	$("#timer").html(timer);
+
+	if (currentQuestion >= total) {
+		$("#messsage").html("You scored: " + score);
+		console.log("testing: " + score);
+	}
 
 	//Check the answer
 	$(".answers").click(function() {
@@ -134,8 +143,6 @@ function startGame() {
 $("#nextBtn").click( function() {
 	if(currentQuestion < total - 1) {
 		currentQuestion++;
-		console.log(currentQuestion);
-		console.log(total);
 		$("#question").show();
 		$("#image").hide();
 		$("#answers").html("");
@@ -144,17 +151,18 @@ $("#nextBtn").click( function() {
 		$("#nextBtn").hide();
 		timer = 30;
 		startGame();
-		console.log(currentQuestion + " of " + total);
 	} else {
 		currentQuestion = 0;
 		$("#startBtn").show();
 		$(".correct").hide();
-		$("#message").hide();
+		//$("#message").hide();
+		$("#message").html("");
 		$("#nextBtn").hide();
 		$("#image").hide();
-		$(".question").html("You scored: " + score);
+		$(".question").show();
+		clearInterval(timer);
 		timer = 30;
-		console.log(currentQuestion);
+		correct = 0;
 	}
 });
 
@@ -174,11 +182,14 @@ function nextQuestion() {
 		currentQuestion = 0;
 		$("#startBtn").show();
 		$(".correct").hide();
-		$("#message").hide();
+		//$("#message").hide();
+		$("#message").html("");
 		$("#nextBtn").hide();
 		$("#image").hide();
+		correct = 0;
+		$("#playerScore").html(score);
+		clearInterval(timer);
 		timer = 30;
-		timerId = clearInterval(timer);
 	}
 }
 
